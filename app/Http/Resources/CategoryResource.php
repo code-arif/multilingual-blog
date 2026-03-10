@@ -2,18 +2,22 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class CategoryResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @return array<string, mixed>
-     */
-    public function toArray(Request $request): array
+    public function toArray($request): array
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'slug' => $this->slug,
+            'description' => $this->description,
+            'status' => $this->status,
+            'color' => $this->color,
+            'icon' => $this->icon,
+            'posts_count' => $this->whenCounted('posts', fn() => $this->posts_count, 0),
+            'created_at' => $this->created_at->toISOString(),
+        ];
     }
 }
