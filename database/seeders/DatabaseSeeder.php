@@ -8,6 +8,7 @@ use App\Models\PostTranslation;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -110,7 +111,7 @@ class DatabaseSeeder extends Seeder
             $post = Post::create([
                 'category_id' => $categoryId,
                 'author_id' => $admin->id,
-                'slug' => \Str::slug($postData['en']['title']),
+                'slug' => Str::slug($postData['en']['title']),
                 'status' => 'published',
                 'published_at' => now()->subDays(rand(1, 30)),
             ]);
